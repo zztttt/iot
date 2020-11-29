@@ -12,7 +12,17 @@ def show():
 
     params = '{"productId": "15011727", "deviceId": "9a0aff904d3a4f3382388eaf0d3b39de"}'
     result = apis.aep_device_status.QueryDeviceStatusList('GPvZaoo8eU2', '31nw67zu6O', params)
+    jsonR = json.loads(result)
     print('result='+str(result)+"\n")
+
+    temperature = -1;
+    lists = jsonR['deviceStatusList']
+    for list in lists:
+        if list['datasetId'] == 'temperature_data':
+            temperature = list['value']
+    print(float(temperature))
+    exit = int(float(temperature))
+    sys.exit(exit)
 
     #params = [{"productId": "10000088", "deviceId": "10000088001", "begin_timestamp": "1538981624878", "end_timestamp": "1539575396505"}]
     #data = json.dumps(params)
