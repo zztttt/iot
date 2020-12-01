@@ -47,4 +47,11 @@ if __name__ == '__main__':
 
     print(body_str)
     result = apis.aep_device_command.CreateCommand(appKey, appSecret, MasterKey, body_str)
+    print(type(result))
     print('result=' + str(result))
+
+    jsonR = json.loads(result)
+    if (jsonR["code"] == 0 and jsonR["msg"] == "ok"):
+        sys.exit(0)
+    else:
+        sys.exit(jsonR["code"])
